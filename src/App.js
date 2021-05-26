@@ -1,9 +1,21 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import './style.css';
 
 export default function App() {
   function handleClick(e) {
-    alert('manga');
+    return Swal.fire({
+      title: 'Quer se candidatar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, quero!'
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire('Sucesso!', 'Você se candidatou.', 'success');
+      }
+    });
   }
 
   return (
