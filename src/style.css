@@ -35,6 +35,12 @@ input {
   flex-direction: column;
   border-radius: 4px;
 }
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+}
 
 .informations {
   display: flex;

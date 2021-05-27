@@ -6,6 +6,22 @@ import Modal from 'react-modal';
 export default function App() {
   var subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [warn, setWarn] = React.useState(false);
+  const [title, setTitle] = React.useState(false);
+  const [jobs, setJobs] = React.useState([
+    {
+      title: 'Estágio de desenvolvimento',
+      description:
+        'Lorem Ipsum is simply dummy text of the printg and typesetting industry. Lorem Ipsum has been',
+      hour: '00:00 até 23:59',
+      local: 'Centro, Rio de janeiro',
+      wage: 'a combinar rsrsrs'
+    }
+  ]);
+  const [description, setDescription] = React.useState(false);
+  const [hour, setHour] = React.useState(false);
+  const [local, setLocal] = React.useState(false);
+  const [wage, setWage] = React.useState(false);
   function openModal() {
     setIsOpen(true);
   }
@@ -20,8 +36,24 @@ export default function App() {
     }
   };
 
-  function closeModal() {
+  function closeModal(event) {
     setIsOpen(false);
+  }
+
+  function sendForm(event) {
+    console.log(title, description, hour, local, wage);
+    if (
+      title != '' &&
+      description != '' &&
+      hour != '' &&
+      local != '' &&
+      wage != ''
+    ) {
+      setJobs([...jobs, { title, description, hour, local, wage }]);
+      setIsOpen(false);
+    } else {
+      alert('Todos os campos devem ser preenchidos');
+    }
   }
 
   function handleClick(e) {
@@ -51,190 +83,82 @@ export default function App() {
           <form>
             <label class="labelInput">
               Titilo:
-              <input type="text" name="title" />
+              <input
+                type="text"
+                name="title"
+                onChange={item => setTitle(item.target.value)}
+              />
             </label>
             <label class="labelInput">
               Descricao:
-              <input type="text" name="description" />
+              <input
+                type="text"
+                name="description"
+                onChange={item => setDescription(item.target.value)}
+              />
             </label>
             <label class="labelInput">
               Horário:
-              <input type="text" name="hour" />
+              <input
+                type="text"
+                name="hour"
+                onChange={item => setHour(item.target.value)}
+              />
             </label>
             <label class="labelInput">
               Local:
-              <input type="text" name="local" />
+              <input
+                type="text"
+                name="local"
+                onChange={item => setLocal(item.target.value)}
+              />
             </label>
             <label class="labelInput">
               Salário:
-              <input type="text" name="wage" />
+              <input
+                type="text"
+                name="wage"
+                onChange={item => setWage(item.target.value)}
+              />
             </label>
-            <input type="submit" onClick={closeModal} value="Submit" />
+            <input type="button" onClick={sendForm} value="Submit" />
           </form>
         </div>
       </Modal>
-      <button onClick={openModal}>Open Modal</button>
+      <div class="botao">
+        <button onClick={openModal}>Publicar uma nova vaga</button>
+      </div>
       <div class="mainDiv">
-        <div class="post">
-          <div class="informations">
-            <h4> Estágio de desenvolvimento </h4>
-            <p class="descricao">
-              {' '}
-              Lorem Ipsum is simply dummy text of the printg and typesetting
-              industry. Lorem Ipsum has been{' '}
-            </p>
-            <p class="hour">
-              {' '}
-              <b>Horário</b>: 00:00 até 23:59
-            </p>
-            <p class="local">
-              <b>Local</b>: Centro, Rio de janeiro
-            </p>
-            <p class="local">
-              <b>Salário</b>: a combinar rsrsrs
-            </p>
+        {jobs.map(item => (
+          <div class="post">
+            <div class="informations">
+              <h4> {item.title}</h4>
+              <p class="descricao"> {item.description} </p>
+              <p class="hour">
+                {' '}
+                <b>Horário</b>: {item.hour}
+              </p>
+              <p class="local">
+                <b>Local</b>: {item.local}
+              </p>
+              <p class="local">
+                <b>Salário</b>: {item.wage}
+              </p>
+            </div>
+            <div class="buttons">
+              <a onClick={handleClick}>
+                <div class="buttonLeft">
+                  <p> Denunciar </p>
+                </div>
+              </a>
+              <a onClick={handleClick}>
+                <div class="buttonRight">
+                  <p>Se candidatar</p>
+                </div>
+              </a>
+            </div>
           </div>
-          <div class="buttons">
-            <a onClick={handleClick}>
-              <div class="buttonLeft">
-                <p> Denunciar </p>
-              </div>
-            </a>
-            <a onClick={handleClick}>
-              <div class="buttonRight">
-                <p>Se candidatar</p>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="post">
-          <div class="informations">
-            <h4> Estágio de desenvolvimento </h4>
-            <p class="descricao">
-              {' '}
-              Lorem Ipsum is simply dummy text of the printg and typesetting
-              industry. Lorem Ipsum has been{' '}
-            </p>
-            <p class="hour">
-              {' '}
-              <b>Horário</b>: 00:00 até 23:59
-            </p>
-            <p class="local">
-              <b>Local</b>: Centro, Rio de janeiro
-            </p>
-            <p class="local">
-              <b>Salário</b>: a combinar rsrsrs
-            </p>
-          </div>
-          <div class="buttons">
-            <a onClick={handleClick}>
-              <div class="buttonLeft">
-                <p> Denunciar </p>
-              </div>
-            </a>
-            <a onClick={handleClick}>
-              <div class="buttonRight">
-                <p>Se candidatar</p>
-              </div>
-            </a>
-          </div>
-        </div>{' '}
-        <div class="post">
-          <div class="informations">
-            <h4> Estágio de desenvolvimento </h4>
-            <p class="descricao">
-              {' '}
-              Lorem Ipsum is simply dummy text of the printg and typesetting
-              industry. Lorem Ipsum has been{' '}
-            </p>
-            <p class="hour">
-              {' '}
-              <b>Horário</b>: 00:00 até 23:59
-            </p>
-            <p class="local">
-              <b>Local</b>: Centro, Rio de janeiro
-            </p>
-            <p class="local">
-              <b>Salário</b>: a combinar rsrsrs
-            </p>
-          </div>
-          <div class="buttons">
-            <a onClick={handleClick}>
-              <div class="buttonLeft">
-                <p> Denunciar </p>
-              </div>
-            </a>
-            <a onClick={handleClick}>
-              <div class="buttonRight">
-                <p>Se candidatar</p>
-              </div>
-            </a>
-          </div>
-        </div>{' '}
-        <div class="post">
-          <div class="informations">
-            <h4> Estágio de desenvolvimento </h4>
-            <p class="descricao">
-              {' '}
-              Lorem Ipsum is simply dummy text of the printg and typesetting
-              industry. Lorem Ipsum has been{' '}
-            </p>
-            <p class="hour">
-              {' '}
-              <b>Horário</b>: 00:00 até 23:59
-            </p>
-            <p class="local">
-              <b>Local</b>: Centro, Rio de janeiro
-            </p>
-            <p class="local">
-              <b>Salário</b>: a combinar rsrsrs
-            </p>
-          </div>
-          <div class="buttons">
-            <a onClick={handleClick}>
-              <div class="buttonLeft">
-                <p> Denunciar </p>
-              </div>
-            </a>
-            <a onClick={handleClick}>
-              <div class="buttonRight">
-                <p>Se candidatar</p>
-              </div>
-            </a>
-          </div>
-        </div>{' '}
-        <div class="post">
-          <div class="informations">
-            <h4> Estágio de desenvolvimento </h4>
-            <p class="descricao">
-              {' '}
-              Lorem Ipsum is simply dummy text of the printg and typesetting
-              industry. Lorem Ipsum has been{' '}
-            </p>
-            <p class="hour">
-              {' '}
-              <b>Horário</b>: 00:00 até 23:59
-            </p>
-            <p class="local">
-              <b>Local</b>: Centro, Rio de janeiro
-            </p>
-            <p class="local">
-              <b>Salário</b>: a combinar rsrsrs
-            </p>
-          </div>
-          <div class="buttons">
-            <a onClick={handleClick}>
-              <div class="buttonLeft">
-                <p> Denunciar </p>
-              </div>
-            </a>
-            <a onClick={handleClick}>
-              <div class="buttonRight">
-                <p>Se candidatar</p>
-              </div>
-            </a>
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );
