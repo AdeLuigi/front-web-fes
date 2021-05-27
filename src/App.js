@@ -16,6 +16,22 @@ export default function App() {
       hour: '00:00 até 23:59',
       local: 'Centro, Rio de janeiro',
       wage: 'a combinar rsrsrs'
+    },
+    {
+      title: 'Estágio de Android',
+      description:
+        'Lorem Ipsum is simply dummy text of the printg and tindustry. Lorem Ipsum has been',
+      hour: '00:00 até 23:59',
+      local: 'Bangu, Rio de janeiro',
+      wage: 'R$ 999999'
+    },
+    {
+      title: 'Desenvolvedor Júnior',
+      description:
+        'Lorem Ipsum is simplye printg and typesetting industry. Lorem Ipsum has been',
+      hour: '00:00 até 21:59',
+      local: 'Copacabana, Rio de janeiro',
+      wage: 'R$ 55'
     }
   ]);
   const [description, setDescription] = React.useState(false);
@@ -67,6 +83,21 @@ export default function App() {
     }).then(result => {
       if (result.isConfirmed) {
         Swal.fire('Sucesso!', 'Você se candidatou.', 'success');
+      }
+    });
+  }
+
+  function handleClickDenunciation(e) {
+    return Swal.fire({
+      title: 'Quer denunciar essa vaga?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, quero!'
+    }).then(result => {
+      if (result.isConfirmed) {
+        Swal.fire('Sucesso!', 'Você denunciou essa vaga.', 'success');
       }
     });
   }
@@ -146,9 +177,9 @@ export default function App() {
               </p>
             </div>
             <div class="buttons">
-              <a onClick={handleClick}>
+              <a onClick={handleClickDenunciation}>
                 <div class="buttonLeft">
-                  <p> Denunciar </p>
+                  <p>Denunciar</p>
                 </div>
               </a>
               <a onClick={handleClick}>
