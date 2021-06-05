@@ -1,39 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import './style.css';
 import Modal from 'react-modal';
+import api from './api/api'
 
 export default function App() {
   var subtitle;
+  
+  useEffect(() => {
+    async function getSchedules(){
+      const data = await api.get('/vaga')
+      setJobs(data.data)
+      console.log('schedules',data.data)
+    }
+    getSchedules();
+  }, []);
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [warn, setWarn] = React.useState(false);
   const [title, setTitle] = React.useState(false);
-  const [jobs, setJobs] = React.useState([
-    {
-      title: 'Estágio de desenvolvimento',
-      description:
-        'Lorem Ipsum is simply dummy text of the printg and typesetting industry. Lorem Ipsum has been',
-      hour: '00:00 até 23:59',
-      local: 'Centro, Rio de janeiro',
-      wage: 'a combinar rsrsrs'
-    },
-    {
-      title: 'Estágio de Android',
-      description:
-        'Lorem Ipsum is simply dummy text of the printg and tindustry. Lorem Ipsum has been',
-      hour: '00:00 até 23:59',
-      local: 'Bangu, Rio de janeiro',
-      wage: 'R$ 999999'
-    },
-    {
-      title: 'Desenvolvedor Júnior',
-      description:
-        'Lorem Ipsum is simplye printg and typesetting industry. Lorem Ipsum has been',
-      hour: '00:00 até 21:59',
-      local: 'Copacabana, Rio de janeiro',
-      wage: 'R$ 55'
-    }
-  ]);
+  const [jobs, setJobs] = React.useState([]);
   const [description, setDescription] = React.useState(false);
   const [hour, setHour] = React.useState(false);
   const [local, setLocal] = React.useState(false);
@@ -177,10 +163,10 @@ export default function App() {
               <p class="descricao"> {item.description} </p>
               <p class="hour">
                 {' '}
-                <b>Horário</b>: {item.hour}
+                <b>Horário</b>: {item.schedule}
               </p>
               <p class="local">
-                <b>Local</b>: {item.local}
+                <b>Local</b>: {item.city}, {item.district}
               </p>
               <p class="local">
                 <b>Salário</b>: {item.wage}
