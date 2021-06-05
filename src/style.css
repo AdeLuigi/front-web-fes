@@ -2,8 +2,15 @@ h1,
 p,
 h3,
 h4 {
-  font-family: Lato;
+  font-family: Roboto;
 }
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+
+}
+
 input {
   width: 100%;
   height: 48px;
