@@ -53,6 +53,11 @@ export default function App() {
   };
 
   function closeModal(event) {
+    setTitle('');
+    setDescription('');
+    setHour('');
+    setLocal('');
+    setWage('');
     setIsOpen(false);
   }
 
@@ -66,6 +71,11 @@ export default function App() {
       wage != ''
     ) {
       setJobs([...jobs, { title, description, hour, local, wage }]);
+      setTitle('');
+      setDescription('');
+      setHour('');
+      setLocal('');
+      setWage('');
       setIsOpen(false);
     } else {
       alert('Todos os campos devem ser preenchidos');
