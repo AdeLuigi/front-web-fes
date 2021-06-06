@@ -25,6 +25,8 @@ export default function Cadastro() {
             history.push("/vaga",{
                 data
             });
+            localStorage.setItem('userData', JSON.stringify(data))
+
           }else{
               setError(true)
               setErrorMessage(data.error)
