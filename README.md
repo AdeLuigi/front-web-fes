@@ -25,8 +25,13 @@ Caso você queira ver o sistema rodando ou ter acesso a API, basta clicar nestes
 
 ## Rodas da API:
 { POST } https://vagas-estagio.herokuapp.com/cadastro: Cadastro
+
 { POST } https://vagas-estagio.herokuapp.com/login: Login
+
 { POST } https://vagas-estagio.herokuapp.com/vaga: Cadastrar vaga de estágio
+
 { GET } https://vagas-estagio.herokuapp.com/vaga: Listagem de vagas
+
 { GET } https://vagas-estagio.herokuapp.com/vaga/{idVaga}: Detalhar vaga
+
 { POST } https://vagas-estagio.herokuapp.com/vaga/{idVaga}: Se candidatar
