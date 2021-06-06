@@ -11,7 +11,6 @@ export const ButtonList = styled(Button)`
 `;
 
 export const ButtonCandidate = styled(Button)`
-    margin: 50px;
 `;
 
 export const Input = styled(TextField)`

@@ -157,16 +157,18 @@ export default function App(props) {
 
               <Input
                 type="text"
-                placeholder="Titilo"
+                placeholder="Titulo"
                 name="title"
+                style={{margin:0}}
                 onChange={item => setTitle(item.target.value)}
               />
             </label>
             <label className="labelInput">
               <Input
-              placeholder="Descricao"
+              placeholder="Descrição"
                 type="text"
                 name="description"
+                style={{margin:0}}
                 onChange={item => setDescription(item.target.value)}
               />
             </label>
@@ -175,6 +177,7 @@ export default function App(props) {
                 placeholder="Horas de Trabalho por dia"
                 type="text"
                 name="schedule"
+                style={{margin:0}}
                 onChange={item => setHour(item.target.value)}
               />
             </label>
@@ -183,6 +186,7 @@ export default function App(props) {
                 placeholder="Cidade"
                 type="text"
                 name="city"
+                style={{margin:0}}
                 onChange={item => setCity(item.target.value)}
               />
             </label>
@@ -191,6 +195,7 @@ export default function App(props) {
                 placeholder="Bairro"
                 type="text"
                 name="district"
+                style={{margin:0}}
                 onChange={item => setDistrict(item.target.value)}
               />
             </label>
@@ -199,6 +204,7 @@ export default function App(props) {
                 placeholder="Salário"
                 type="text"
                 name="wage"
+                style={{margin:0}}
                 onChange={item => setWage(item.target.value)}
               />
             </label>
@@ -206,8 +212,8 @@ export default function App(props) {
           </form>
         </div>
       </ModalShow>
-      <div className="botao">
-        <ButtonList style={{backgroundColor:'#4c45b2', color:'#FFF'}} variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
+      <div className="botao" >
+        <ButtonList style={{backgroundColor:'#4c45b2', color:'#FFF', width:'100%', marginRight:8, marginLeft:8}} variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
       </div>
         {jobs.map(item => (
           <div style={{display:'flex', flex:1, alignContent:'center', justifyContent:'center', paddingLeft:16, paddingRight:16}}>
@@ -220,13 +226,13 @@ export default function App(props) {
               <p className="descricao" style={{marginBottom:8}}> {item.description} </p>
               <p className="schedule">
                 {' '}
-                <b style={{color:'#6c63ff'}}>Horário</b>: {item.schedule}
+                <b style={{color:'#4c45b2'}}>Horas por dia</b>: {item.schedule}
               </p>
               <p className="schedule">
-                <b style={{color:'#6c63ff'}}>Local</b>: {item.city}, {item.district}
+                <b style={{color:'#4c45b2'}}>Local</b>: {item.city}, {item.district}
               </p>
               <p className="schedule">
-                <b style={{color:'#6c63ff'}}>Salário</b>: {item.wage}
+                <b style={{color:'#4c45b2'}}>Salário</b>: {item.wage}
               </p>
             </div>
             <div className="buttons">
@@ -239,16 +245,15 @@ export default function App(props) {
                   if(candidato != null && (candidato == userData._id)){
                     return candidato
                   }
-              })) == userData._id) ? <ButtonCandidate 
-                    style={{marginRight:16, marginBottom:10,}}
-                  variant="contained" >
-                    Se candidatar
-                  </ButtonCandidate> : <ButtonCandidate 
-                    style={{marginRight:16, marginBottom:10, backgroundColor:'#4c45b2', color:'#FFF'}}
+              })) == userData._id) ?  <ButtonList
+                style={{marginRight:8, marginBottom:10, color: "#33691e"}}>
+                Candidatado
+              </ButtonList>: <ButtonCandidate 
+                    style={{marginRight:8, marginBottom:10, backgroundColor:'#4c45b2', color:'#FFF'}}
                   variant="contained" onClick={() => handleClick(item._id)}>
                     Se candidatar
                   </ButtonCandidate> : <ButtonCandidate 
-                    style={{marginRight:16, marginBottom:10, backgroundColor:'#4c45b2', color:'#FFF'}}
+                    style={{marginRight:8, marginBottom:10, backgroundColor:'#4c45b2', color:'#FFF'}}
                   variant="contained" onClick={() => handleClick(item._id)}>
                     Se candidatar
                   </ButtonCandidate> }
