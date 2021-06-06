@@ -8,9 +8,14 @@ export const Navbar = () => (
         {/* <IconButton edge="start"  color="inherit" aria-label="menu">
             <MenuIcon />
         </IconButton> */}
-        <Typography variant="h6" style={{flexGrow: 1}} >
+        <Typography variant="h6" >
         Divulgação de Estágios
+        
         </Typography>
+        <Typography variant="caption" style={{flexGrow: 1, marginLeft: 6, color: '#999999'}} >
+         by G5
+        </Typography>
+
         {/* <Button color="inherit">Sair</Button> */}
 
         </Toolbar>
