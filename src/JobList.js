@@ -232,7 +232,7 @@ export default function App(props) {
                 <b style={{color:'#4c45b2'}}>Local</b>: {item.city}, {item.district}
               </p>
               <p className="schedule">
-                <b style={{color:'#4c45b2'}}>Salário</b>: {item.wage}
+                <b style={{color:'#4c45b2'}}>Salário</b>: R$ {item.wage},00
               </p>
             </div>
             <div className="buttons">
