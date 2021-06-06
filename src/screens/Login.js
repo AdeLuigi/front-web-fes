@@ -37,7 +37,7 @@ export default function Login() {
 
     return (
         <>
-            <Navbar/>
+           
             <Container>
                 <ReactLogo height={350} width={350}/>
                 <div style={{display:'flex',width:'80%', flexDirection:'column'}}>
