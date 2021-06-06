@@ -202,15 +202,15 @@ export default function App(props) {
                 onChange={item => setWage(item.target.value)}
               />
             </label>
-            <ButtonList style={{height:45, backgroundColor:'#388e3c'}} variant="contained" type="button" onClick={sendForm} >Cadastrar Vaga</ButtonList>
+            <ButtonList style={{height:45, backgroundColor:'#4c45b2', color:'#FFF'}} variant="contained" type="button" onClick={sendForm} >Cadastrar Vaga</ButtonList>
           </form>
         </div>
       </ModalShow>
       <div className="botao">
-        <ButtonList variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
+        <ButtonList style={{backgroundColor:'#4c45b2', color:'#FFF'}} variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
       </div>
         {jobs.map(item => (
-          <div style={{display:'flex', flex:1, alignContent:'center', justifyContent:'center'}}>
+          <div style={{display:'flex', flex:1, alignContent:'center', justifyContent:'center', paddingLeft:16, paddingRight:16}}>
           <BoxContainer style={{width:350}} key={item._id} boxShadow={3}>
             <div className="informations">
               <h4> {item.title}</h4>
@@ -241,11 +241,11 @@ export default function App(props) {
                   variant="contained" >
                     Se candidatar
                   </ButtonCandidate> : <ButtonCandidate 
-                    style={{marginRight:16, marginBottom:10, backgroundColor:'#388e3c'}}
+                    style={{marginRight:16, marginBottom:10, backgroundColor:'#4c45b2', color:'#FFF'}}
                   variant="contained" onClick={() => handleClick(item._id)}>
                     Se candidatar
                   </ButtonCandidate> : <ButtonCandidate 
-                    style={{marginRight:16, marginBottom:10, backgroundColor:'#388e3c'}}
+                    style={{marginRight:16, marginBottom:10, backgroundColor:'#4c45b2', color:'#FFF'}}
                   variant="contained" onClick={() => handleClick(item._id)}>
                     Se candidatar
                   </ButtonCandidate> }
