@@ -3,7 +3,6 @@ import {useHistory} from 'react-router-dom'
 import { ReactSVG } from 'react-svg';
 import { Snackbar} from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import { Navbar } from '../components/Navbar'
 import api from '../api/api'
 import {Container, Input,ButtonUI,} from './styles';
 import {ReactComponent as ReactLogo} from './work.svg';
