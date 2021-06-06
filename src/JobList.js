@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import './style.css';
-import {Backdrop, KeyboardTimePicker} from '@material-ui/core'
+import {Backdrop, Divider} from '@material-ui/core'
 import api from './api/api'
 import { BoxContainer, ButtonList, ButtonCandidate, Input, ModalShow } from './styles'
 
@@ -213,17 +213,20 @@ export default function App(props) {
           <div style={{display:'flex', flex:1, alignContent:'center', justifyContent:'center', paddingLeft:16, paddingRight:16}}>
           <BoxContainer style={{width:350}} key={item._id} boxShadow={3}>
             <div className="informations">
-              <h4> {item.title}</h4>
-              <p className="descricao"> {item.description} </p>
+              <h4 style={{color:'#4c45b2'}}> {item.title.toUpperCase()}</h4>
+              <div style={{width:'95%', marginTop:8, marginBottom:8}}>
+              <Divider  />
+              </div>
+              <p className="descricao" style={{marginBottom:8}}> {item.description} </p>
               <p className="schedule">
                 {' '}
-                <b>Horário</b>: {item.schedule}
+                <b style={{color:'#6c63ff'}}>Horário</b>: {item.schedule}
               </p>
               <p className="local">
-                <b>Local</b>: {item.city}, {item.district}
+                <b style={{color:'#6c63ff'}}>Local</b>: {item.city}, {item.district}
               </p>
               <p className="local">
-                <b>Salário</b>: {item.wage}
+                <b style={{color:'#6c63ff'}}>Salário</b>: {item.wage}
               </p>
             </div>
             <div className="buttons">
