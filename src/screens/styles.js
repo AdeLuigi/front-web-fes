@@ -10,10 +10,6 @@ export const Container = styled.div`
     flex-direction: column;
     padding: 16px;
 
-    @media(min-width: 1024px) {
-        max-width: 64rem;
-        margin: auto;
-    }
 `;
 
 export const Title = styled.h1`
@@ -26,11 +22,6 @@ export const Input = styled(TextField)`
     height: 45px;
     margin: 8px ;
     border: none;
-
-    @media(min-width: 1024px) {
-        max-width: 30rem;
-        margin: auto;
-    }
     
 `;
 
@@ -38,11 +29,5 @@ export const ButtonUI = styled(Button)`
     width: 100%;
     height: 45px;
     border-radius: 4px;
-    background-color: #6A96C7 !important;
-    color: white !important;
-
-    @media(min-width: 1024px) {
-        max-width: 30rem;
-        margin: auto;
-    }
+    background-color: #6C63FF;
 `;
