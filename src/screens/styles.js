@@ -29,5 +29,4 @@ export const ButtonUI = styled(Button)`
     width: 100%;
     height: 45px;
     border-radius: 4px;
-    background-color: #6C63FF;
 `;

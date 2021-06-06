@@ -118,3 +118,9 @@ input {
   align-items: flex-end;
   justify-content: flex-end;
 }
+
+@media(max-width: 1024px) {
+  .desktop{
+    display: none !important;
+  }
+}
