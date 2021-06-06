@@ -24,6 +24,7 @@ $ npm start
 Caso você queira ver o sistema rodando ou ter acesso a API, basta clicar nestes links: [SPA](https://vagas-estagio-front.herokuapp.com/vaga "Clique e veja o site"), [API](https://vagas-estagio.herokuapp.com/ "Clique e veja a API").
 
 ## Rodas da API:
+```
 { POST } https://vagas-estagio.herokuapp.com/cadastro: Cadastro
 
 { POST } https://vagas-estagio.herokuapp.com/login: Login
@@ -35,3 +36,4 @@ Caso você queira ver o sistema rodando ou ter acesso a API, basta clicar nestes
 { GET } https://vagas-estagio.herokuapp.com/vaga/{idVaga}: Detalhar vaga
 
 { POST } https://vagas-estagio.herokuapp.com/vaga/{idVaga}: Se candidatar
+```
