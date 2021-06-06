@@ -44,7 +44,7 @@ export default function Cadastro() {
                 name="password" 
                 onChange={item => setPassword(item.target.value)} placeholder="Senha"
             />
-            <ButtonUI onClick={login}>Cadastrar-se</ButtonUI>
+            <ButtonUI variant="contained" onClick={login}>Cadastrar-se</ButtonUI>
             {error && (
                 <Snackbar open={error} autoHideDuration={6000} >
                     <MuiAlert onClose={() => setError(false)} severity="error">

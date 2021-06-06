@@ -1,30 +1,38 @@
 import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import './style.css';
-import {Backdrop} from '@material-ui/core'
+import {Backdrop, KeyboardTimePicker} from '@material-ui/core'
 import api from './api/api'
 import { BoxContainer, ButtonList, ButtonCandidate, Input, ModalShow } from './styles'
 
 export default function App(props) {
+
+  const userData = JSON.parse(localStorage.getItem('userData'));
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [warn, setWarn] = React.useState(false);
   const [title, setTitle] = React.useState(false);
   const [jobs, setJobs] = React.useState([]);
   const [description, setDescription] = React.useState(false);
-  const [hour, setHour] = React.useState(false);
+  const [schedule, setHour] = React.useState(false);
   const [city, setCity] = React.useState(false);
   const [district, setDistrict] = React.useState(false);
   const [wage, setWage] = React.useState(false);
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+
   function openModal() {
     setIsOpen(true);
   }
 
   useEffect(() => {
+    console.log('schedule', schedule)
+
+  }, [schedule]);
+
+  useEffect(() => {
     async function getSchedules(){
       const data = await api.get('/vaga')
       setJobs(data.data)
-      console.log('schedules',data.data)
     }
     getSchedules();
   }, []);
@@ -51,22 +59,21 @@ export default function App(props) {
   }
 
   async function sendForm(event) {
-    console.log(title, description, hour, city, district, wage);
     if (
       title != '' &&
       description != '' &&
-      hour != '' &&
+      schedule != '' &&
       city != '' &&
       district != '' &&
       wage != ''
     ) {
 
       const { data } = await api.post('/vaga',{
-        title, description, hour, city, district, wage
+        title, description, schedule, city, district, wage
       })
-
+      console.log('jobsss', data)
       if(data){
-        setJobs([...jobs, { title, description, hour, city, district, wage }]);
+        setJobs([...jobs, data]);
         setTitle('');
         setDescription('');
         setHour('');
@@ -82,7 +89,7 @@ export default function App(props) {
     }
   }
 
-  function handleClick(e) {
+  function handleClick(id) {
     return Swal.fire({
       title: 'Quer se candidatar?',
       icon: 'warning',
@@ -90,9 +97,25 @@ export default function App(props) {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sim, quero!'
-    }).then(result => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire('Sucesso!', 'Você se candidatou.', 'success');
+
+        const {data} = await api.put(`/vaga/${id}`, {
+          userId: userData._id
+        })
+
+        if(data){
+          const newJobs = jobs.map((item) => {
+            if(data._id == item._id){
+              return data
+            }
+            return item
+          })
+          setJobs(newJobs)
+
+          Swal.fire('Sucesso!', 'Você se candidatou.', 'success');
+        }
+
       }
     });
   }
@@ -128,9 +151,9 @@ export default function App(props) {
           timeout: 500,
         }}
       >
-        <div class="createPost">
+        <div className="createPost">
           <form>
-            <label class="labelInput">
+            <label className="labelInput">
 
               <Input
                 type="text"
@@ -139,7 +162,7 @@ export default function App(props) {
                 onChange={item => setTitle(item.target.value)}
               />
             </label>
-            <label class="labelInput">
+            <label className="labelInput">
               <Input
               placeholder="Descricao"
                 type="text"
@@ -147,15 +170,15 @@ export default function App(props) {
                 onChange={item => setDescription(item.target.value)}
               />
             </label>
-            <label class="labelInput">
+            <label className="labelInput">
               <Input
-                placeholder="Horário"
+                placeholder="Horas de Trabalho por dia"
                 type="text"
-                name="hour"
+                name="schedule"
                 onChange={item => setHour(item.target.value)}
               />
             </label>
-            <label class="labelInput">
+            <label className="labelInput">
               <Input
                 placeholder="Cidade"
                 type="text"
@@ -163,7 +186,7 @@ export default function App(props) {
                 onChange={item => setCity(item.target.value)}
               />
             </label>
-            <label class="labelInput">
+            <label className="labelInput">
               <Input
                 placeholder="Bairro"
                 type="text"
@@ -171,7 +194,7 @@ export default function App(props) {
                 onChange={item => setDistrict(item.target.value)}
               />
             </label>
-            <label class="labelInput">
+            <label className="labelInput">
               <Input
                 placeholder="Salário"
                 type="text"
@@ -179,45 +202,58 @@ export default function App(props) {
                 onChange={item => setWage(item.target.value)}
               />
             </label>
-            <ButtonList style={{height:45}} variant="contained" type="button" onClick={sendForm} >Cadastrar Vaga</ButtonList>
+            <ButtonList style={{height:45, backgroundColor:'#388e3c'}} variant="contained" type="button" onClick={sendForm} >Cadastrar Vaga</ButtonList>
           </form>
         </div>
       </ModalShow>
-      <div class="botao">
+      <div className="botao">
         <ButtonList variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
       </div>
         {jobs.map(item => (
-          <BoxContainer boxShadow={3}>
-            <div class="informations">
+          <div style={{display:'flex', flex:1, alignContent:'center', justifyContent:'center'}}>
+          <BoxContainer style={{width:350}} key={item._id} boxShadow={3}>
+            <div className="informations">
               <h4> {item.title}</h4>
-              <p class="descricao"> {item.description} </p>
-              <p class="hour">
+              <p className="descricao"> {item.description} </p>
+              <p className="schedule">
                 {' '}
                 <b>Horário</b>: {item.schedule}
               </p>
-              <p class="local">
+              <p className="local">
                 <b>Local</b>: {item.city}, {item.district}
               </p>
-              <p class="local">
+              <p className="local">
                 <b>Salário</b>: {item.wage}
               </p>
             </div>
-            <div class="buttons">
+            <div className="buttons">
               <ButtonList
-                
-                style={{marginRight:8, marginBottom:10, color: "#b71c1c"}}
-               onClick={handleClickDenunciation}>
+                style={{marginRight:8, marginBottom:10, color: "#b71c1c"}}>
                 Denunciar
               </ButtonList>
               <div>
-              <ButtonCandidate 
-                style={{marginRight:16, marginBottom:10, backgroundColor:'#388e3c'}}
-              variant="contained" onClick={handleClick}>
-                Se candidatar
-              </ButtonCandidate>
+              {typeof item.candidates  !== 'undefined' ? ((item.candidates.find((candidato) => {
+                  if(candidato != null && (candidato == userData._id)){
+                    return candidato
+                  }
+              })) == userData._id) ? <ButtonCandidate 
+                    style={{marginRight:16, marginBottom:10,}}
+                  variant="contained" >
+                    Se candidatar
+                  </ButtonCandidate> : <ButtonCandidate 
+                    style={{marginRight:16, marginBottom:10, backgroundColor:'#388e3c'}}
+                  variant="contained" onClick={() => handleClick(item._id)}>
+                    Se candidatar
+                  </ButtonCandidate> : <ButtonCandidate 
+                    style={{marginRight:16, marginBottom:10, backgroundColor:'#388e3c'}}
+                  variant="contained" onClick={() => handleClick(item._id)}>
+                    Se candidatar
+                  </ButtonCandidate> }
+              
               </div>
             </div>
           </BoxContainer>
+          </div>
         ))}
     </>
   );
