@@ -36,6 +36,7 @@ export default function Cadastro() {
     return (
         <Container>
             <ReactLogo height={350} width={350}/>
+            <div style={{display:'flex',width:'80%', flexDirection:'column'}}>
             <Input 
                 name="email" 
                 onChange={item => setEmail(item.target.value)} placeholder="Email"
@@ -44,7 +45,8 @@ export default function Cadastro() {
                 name="password" 
                 onChange={item => setPassword(item.target.value)} placeholder="Senha"
             />
-            <ButtonUI variant="contained" onClick={login}>Cadastrar-se</ButtonUI>
+            <ButtonUI style={{marginTop:25, borderRadius:15, backgroundColor:'#4c45b2', color:'#FFF', paddingLeft:10, paddingRight:10}} variant="contained" onClick={login}>Cadastrar-se</ButtonUI>
+            
             {error && (
                 <Snackbar open={error} autoHideDuration={6000} >
                     <MuiAlert onClose={() => setError(false)} severity="error">
@@ -52,6 +54,7 @@ export default function Cadastro() {
                     </MuiAlert>
                 </Snackbar>
             )}
+            </div>
         </Container>
     )
 }
