@@ -222,10 +222,10 @@ export default function App(props) {
                 {' '}
                 <b style={{color:'#6c63ff'}}>Horário</b>: {item.schedule}
               </p>
-              <p className="local">
+              <p className="schedule">
                 <b style={{color:'#6c63ff'}}>Local</b>: {item.city}, {item.district}
               </p>
-              <p className="local">
+              <p className="schedule">
                 <b style={{color:'#6c63ff'}}>Salário</b>: {item.wage}
               </p>
             </div>
