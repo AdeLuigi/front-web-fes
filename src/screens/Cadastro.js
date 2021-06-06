@@ -7,7 +7,7 @@ import api from '../api/api'
 import {useHistory} from 'react-router-dom'
 import {Container, Input,ButtonUI,} from './styles';
 
-export default function Login() {
+export default function Cadastro() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false)
@@ -16,7 +16,7 @@ export default function Login() {
     let history = useHistory();
 
     async function login() {
-        const {data} = await api.post('/login', {
+        const {data} = await api.post('/cadastro', {
             email,
             password,
           })
@@ -44,8 +44,7 @@ export default function Login() {
                 name="password" 
                 onChange={item => setPassword(item.target.value)} placeholder="Senha"
             />
-            <ButtonUI variant="contained" onClick={login}>Entrar</ButtonUI>
-            <ButtonUI style={{marginTop:16}} onClick={() => history.push("/cadastro")}>Cadastrar-se</ButtonUI>
+            <ButtonUI onClick={login}>Cadastrar-se</ButtonUI>
             {error && (
                 <Snackbar open={error} autoHideDuration={6000} >
                     <MuiAlert onClose={() => setError(false)} severity="error">

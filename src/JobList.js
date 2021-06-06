@@ -1,13 +1,25 @@
 import React, { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import './style.css';
-import Modal from 'react-modal';
+import {Backdrop} from '@material-ui/core'
 import api from './api/api'
+import { BoxContainer, ButtonList, ButtonCandidate, Input, ModalShow } from './styles'
 
-import { BoxContainer, ButtonList, ButtonCandidate } from './styles'
+export default function App(props) {
 
-export default function App() {
-  
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [warn, setWarn] = React.useState(false);
+  const [title, setTitle] = React.useState(false);
+  const [jobs, setJobs] = React.useState([]);
+  const [description, setDescription] = React.useState(false);
+  const [hour, setHour] = React.useState(false);
+  const [city, setCity] = React.useState(false);
+  const [district, setDistrict] = React.useState(false);
+  const [wage, setWage] = React.useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+
   useEffect(() => {
     async function getSchedules(){
       const data = await api.get('/vaga')
@@ -16,18 +28,7 @@ export default function App() {
     }
     getSchedules();
   }, []);
-
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [warn, setWarn] = React.useState(false);
-  const [title, setTitle] = React.useState(false);
-  const [jobs, setJobs] = React.useState([]);
-  const [description, setDescription] = React.useState(false);
-  const [hour, setHour] = React.useState(false);
-  const [local, setLocal] = React.useState(false);
-  const [wage, setWage] = React.useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
+ 
   const customStyles = {
     content: {
       top: '50%',
@@ -43,27 +44,39 @@ export default function App() {
     setTitle('');
     setDescription('');
     setHour('');
-    setLocal('');
+    setDistrict('');
+    setWage('');
     setWage('');
     setIsOpen(false);
   }
 
-  function sendForm(event) {
-    console.log(title, description, hour, local, wage);
+  async function sendForm(event) {
+    console.log(title, description, hour, city, district, wage);
     if (
       title != '' &&
       description != '' &&
       hour != '' &&
-      local != '' &&
+      city != '' &&
+      district != '' &&
       wage != ''
     ) {
-      setJobs([...jobs, { title, description, hour, local, wage }]);
-      setTitle('');
-      setDescription('');
-      setHour('');
-      setLocal('');
-      setWage('');
-      setIsOpen(false);
+
+      const { data } = await api.post('/vaga',{
+        title, description, hour, city, district, wage
+      })
+
+      if(data){
+        setJobs([...jobs, { title, description, hour, city, district, wage }]);
+        setTitle('');
+        setDescription('');
+        setHour('');
+        setCity('');
+        setDistrict('');
+        setWage('');
+        setIsOpen(false);
+      }
+
+
     } else {
       alert('Todos os campos devem ser preenchidos');
     }
@@ -101,58 +114,75 @@ export default function App() {
 
   return (
     <>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
+      <ModalShow
+        open={modalIsOpen}
+        onClose={closeModal}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        style={{display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',}}
+    closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
       >
         <div class="createPost">
           <form>
             <label class="labelInput">
-              Titilo:
-              <input
+
+              <Input
                 type="text"
+                placeholder="Titilo"
                 name="title"
                 onChange={item => setTitle(item.target.value)}
               />
             </label>
             <label class="labelInput">
-              Descricao:
-              <input
+              <Input
+              placeholder="Descricao"
                 type="text"
                 name="description"
                 onChange={item => setDescription(item.target.value)}
               />
             </label>
             <label class="labelInput">
-              Horário:
-              <input
+              <Input
+                placeholder="Horário"
                 type="text"
                 name="hour"
                 onChange={item => setHour(item.target.value)}
               />
             </label>
             <label class="labelInput">
-              Local:
-              <input
+              <Input
+                placeholder="Cidade"
                 type="text"
-                name="local"
-                onChange={item => setLocal(item.target.value)}
+                name="city"
+                onChange={item => setCity(item.target.value)}
               />
             </label>
             <label class="labelInput">
-              Salário:
-              <input
+              <Input
+                placeholder="Bairro"
+                type="text"
+                name="district"
+                onChange={item => setDistrict(item.target.value)}
+              />
+            </label>
+            <label class="labelInput">
+              <Input
+                placeholder="Salário"
                 type="text"
                 name="wage"
                 onChange={item => setWage(item.target.value)}
               />
             </label>
-            <input type="button" onClick={sendForm} value="Submit" />
+            <ButtonList style={{height:45}} variant="contained" type="button" onClick={sendForm} >Cadastrar Vaga</ButtonList>
           </form>
         </div>
-      </Modal>
+      </ModalShow>
       <div class="botao">
         <ButtonList variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
       </div>

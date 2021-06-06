@@ -24,6 +24,10 @@ input {
 .createPost {
   display: flex;
   width: 100%;
+  background-color: #FFF;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 4px;
 }
 .createPost form {
   display: flex;

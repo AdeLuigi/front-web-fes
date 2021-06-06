@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, Button, Box } from '@material-ui/core'
+import { Card, Button, Box, TextField, Modal, } from '@material-ui/core'
 
 export const BoxContainer = styled(Box)`
     margin: 4px 8px;
@@ -12,4 +12,17 @@ export const ButtonList = styled(Button)`
 
 export const ButtonCandidate = styled(Button)`
     margin: 50px;
+`;
+
+export const Input = styled(TextField)`
+    border-radius: 4px;
+    width: 100%;
+    height: 45px;
+    margin: 8px ;
+    border: none;
+    
+`;
+
+export const ModalShow = styled(Modal)`
+
 `;
