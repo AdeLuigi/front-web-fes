@@ -213,7 +213,7 @@ export default function App(props) {
         </div>
       </ModalShow>
       <div className="botao" >
-        <ButtonList style={{backgroundColor:'#4c45b2', color:'#FFF', width:'100%', marginRight:8, marginLeft:8}} variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
+        <ButtonList style={{backgroundColor:'#4c45b2', color:'#FFF', width:350, marginRight:8, marginLeft:8}} variant="contained" onClick={openModal}>Publicar uma nova vaga</ButtonList>
       </div>
         {jobs.map(item => (
           <div style={{display:'flex', flex:1, alignContent:'center', justifyContent:'center', paddingLeft:16, paddingRight:16}}>
