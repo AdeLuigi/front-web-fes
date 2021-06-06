@@ -37,16 +37,22 @@ export default function Login() {
     return (
         <Container>
             <ReactLogo height={350} width={350}/>
-            <Input 
+            <div style={{display:'flex',width:'80%', flexDirection:'column'}}>
+            <Input
+                
                 name="email" 
                 onChange={item => setEmail(item.target.value)} placeholder="Email"
             />
-            <Input 
+            
+            <Input
+               
                 name="password" 
                 onChange={item => setPassword(item.target.value)} placeholder="Senha"
             />
-            <ButtonUI variant="contained" onClick={login}>Entrar</ButtonUI>
-            <ButtonUI style={{marginTop:16}} onClick={() => history.push("/cadastro")}>Cadastrar-se</ButtonUI>
+
+            <ButtonUI style={{marginTop:25, borderRadius:15, backgroundColor:'#4c45b2', color:'#FFF', paddingLeft:10, paddingRight:10}} variant="contained" onClick={login}>Entrar</ButtonUI>
+            </div>
+            <ButtonUI style={{marginTop:16, paddingLeft:10, paddingRight:10}} onClick={() => history.push("/cadastro")}>Cadastrar-se</ButtonUI>
             {error && (
                 <Snackbar open={error} autoHideDuration={6000} >
                     <MuiAlert onClose={() => setError(false)} severity="error">
