@@ -106,6 +106,8 @@ export default function App(props) {
 
         if(data){
           console.log('Resposta', data)
+          console.log('Resposta', data)
+
           const newJobs = jobs.map((item) => {
             if(data._id == item._id){
               return data
